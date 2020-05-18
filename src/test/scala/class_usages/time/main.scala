@@ -38,6 +38,16 @@ class OriginalTimeClassSpec extends FunSpec with Matchers {
     }
   }
   describe("Duration"){
+
+    it("is comparable with compare operators"){
+      val t1 = Duration("10:00")
+      val t2 = Duration("11:00")
+      val t3 = Duration("10:00")
+      (t1 < t2) shouldBe true
+      (t2 < t3) shouldBe false
+      (t3 == t1) shouldBe true
+    }
+
     describe("toString"){
       it("returns formatted time"){
         Duration(0.2).toString() shouldBe "Time(00:12)"

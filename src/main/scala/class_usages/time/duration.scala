@@ -1,7 +1,9 @@
 package class_usages.time
 
 case class Duration(time: Double)
-  extends DurationOperative[Duration] {
+  extends DurationOperative[Duration]
+  with Ordered[Duration]
+{
 
   override def toString():String = {
     val hour = Math.floor(time)
@@ -13,6 +15,10 @@ case class Duration(time: Double)
   override def -(that: Duration): Unit = Duration(time - that.time)
   override def *(x: Double): Unit = Duration(time * x)
   override def /(x: Double): Unit = Duration(time / x)
+
+  override def compare(that: Duration): Int = {
+    this.time compare that.time
+  }
 }
 
 object Duration {
