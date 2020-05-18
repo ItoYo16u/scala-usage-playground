@@ -1,9 +1,20 @@
+import java.io.InvalidClassException
+import java.security.InvalidParameterException
+
 import class_usages.time.{Duration, Time}
 import org.scalatest._
 import org.scalatest.FunSpec
 class OriginalTimeClassSpec extends FunSpec with Matchers {
 
   describe("Time"){
+
+    describe("#between(t1,t2)"){
+      it("returns half of two Time"){
+        val t1 = Time("08:00")
+        val t2 = Time("09:00")
+        (Time.between(t1,t2)) shouldBe Time(8.5)
+      }
+    }
 
     it("is comparable with compare operators"){
       val t1 = Time("10:00")

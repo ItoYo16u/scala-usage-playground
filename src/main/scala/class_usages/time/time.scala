@@ -24,6 +24,9 @@ object Time {
     val (hourStr,minuteStr) = (split(0),split(1))
     new Time(hourStr.toDouble + minuteStr.toDouble/60)
   }
+  def between(t1:Time,t2:Time):Time = {
+    Time((t1.time + t2.time)/2)
+  }
 }
 
 trait TimeOperative[Time] {
