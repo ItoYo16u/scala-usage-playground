@@ -1,7 +1,7 @@
 import java.io.InvalidClassException
 import java.security.InvalidParameterException
 
-import class_usages.time.{Duration, Time}
+import class_usages.time.{Duration, Time, TimeRange}
 import org.scalatest._
 import org.scalatest.FunSpec
 class OriginalTimeClassSpec extends FunSpec with Matchers {
@@ -62,6 +62,24 @@ class OriginalTimeClassSpec extends FunSpec with Matchers {
     describe("toString"){
       it("returns formatted time"){
         Duration(0.2).toString() shouldBe "Time(00:12)"
+      }
+    }
+  }
+
+  describe("TimeRange"){
+    describe("#isInRange(Time)"){
+      it("returns true if time is in range"){
+        val t1 = Time(10)
+        val t2 = Time(20)
+        val range = TimeRange(Time(5),Time(17))
+        range.isInRange(t1) shouldBe true
+        range.isInRange(t2) shouldBe false
+      }
+    }
+    describe("#toString"){
+      it("returns formatted range"){
+        val range = TimeRange(Time(2),Time(5))
+        range.toString shouldBe "Time(02:00) to Time(05:00)"
       }
     }
   }
