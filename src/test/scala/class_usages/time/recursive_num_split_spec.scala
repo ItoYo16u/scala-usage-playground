@@ -9,9 +9,9 @@ class RecursiveNumSplitSpec extends FunSpec
     it("splits a number into a list of 1 digit until their sum becomes 2 digits"){
       Then("returns (2 digit number + each digit of it)")
 
-      RecursiveMethod.recursive_num_split(98) shouldBe 25
-      RecursiveMethod.recursive_num_split(3528) shouldBe 27
-      RecursiveMethod.recursive_num_split(9514599) shouldBe 48
+      RecursiveMethod.num_split(98) shouldBe 25
+      RecursiveMethod.num_split(3528) shouldBe 27
+      RecursiveMethod.num_split(9514599) shouldBe 48
     }
   }
 }
