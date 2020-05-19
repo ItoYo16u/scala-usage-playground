@@ -1,9 +1,7 @@
-import java.io.InvalidClassException
-import java.security.InvalidParameterException
-
 import class_usages.time.{Duration, Time, TimeRange}
 import org.scalatest._
 import org.scalatest.FunSpec
+
 class OriginalTimeClassSpec extends FunSpec with Matchers {
 
   describe("Time"){
