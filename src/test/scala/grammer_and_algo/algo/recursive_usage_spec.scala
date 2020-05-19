@@ -16,10 +16,18 @@ class RecursiveNumSplitSpec extends FunSpec
     }
   }
   describe("permutation(List[Int])"){
-    it("returns permutation of the List"){
-      val l1=List(1,2,3)
+    it("returns Permutation of list elements"){
+      When("list has a element/elements")
+
+      val l1 = List(1)
       val l2 = List(1,2)
-      RecursiveUsage.permutation(l1) shouldBe List(
+      val l3=List(1,2,3)
+      RecursiveUsage.permutation(l1) shouldBe List(List(1))
+      RecursiveUsage.permutation(l2) shouldBe List(
+        List(1,2),
+        List(2,1)
+      )
+      RecursiveUsage.permutation(l3) shouldBe List(
         List(1,2,3),
         List(1,3,2),
         List(2,1,3),
@@ -27,10 +35,11 @@ class RecursiveNumSplitSpec extends FunSpec
         List(3,1,2),
         List(3,2,1)
       )
-      RecursiveUsage.permutation(l2) shouldBe List(
-        List(1,2),
-        List(2,1)
-      )
+    }
+    it("returns empty List of empty list"){
+      When("list has nothing")
+      val l0 = List()
+      RecursiveUsage.permutation(l0) shouldBe List(List())
     }
   }
 }

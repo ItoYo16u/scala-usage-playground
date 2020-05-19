@@ -14,15 +14,18 @@ object RecursiveUsage {
   }
 
   def permutation[T](l: List[T]) : List[List[T]]= {
-    if(l.length==2){
-      return List(List(l.head,l.last),List(l.last,l.head))
+    l match {
+      case Nil => return List(List())
+      case head::Nil => return List(List(head))
+      case head::tail::Nil => return List(List(head,tail),List(tail,head))
+      case _ => l.foldRight(Nil:List[List[T]])((elm,acc)=>{
+        permutation(l.filterNot(_==elm)).map((sub)=> {elm :: sub})
+          .foldRight(acc)((list,result)=>{
+            list :: result
+          })
+        }
+      )
     }
-    l.foldRight(Nil:List[List[T]])((elm,acc)=>{
-      permutation(l.filterNot(_==elm)).map((sub)=> {elm :: sub})
-        .foldRight(acc)((list,result)=>{
-          list :: result
-        })
 
-    })
   }
 }
