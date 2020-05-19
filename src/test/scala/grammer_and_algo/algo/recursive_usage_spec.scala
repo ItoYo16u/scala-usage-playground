@@ -42,6 +42,27 @@ class RecursiveNumSplitSpec extends FunSpec
       val l0 = List()
       RecursiveUsage.permutation(l0) shouldBe List(List())
     }
+    it("is available"){
+      When("List elements are not Integer")
+      val l3_str = List("1","2","3")
+      RecursiveUsage.permutation(l3_str) should contain allOf(
+        List("1","2","3"),
+        List("1","3","2"),
+        List("2","1","3"),
+        List("2","3","1"),
+        List("3","1","2"),
+        List("3","2","1")
+      )
+      RecursiveUsage.permutation(l3_str) should contain only(
+        List("1","2","3"),
+        List("1","3","2"),
+        List("2","1","3"),
+        List("2","3","1"),
+        List("3","1","2"),
+        List("3","2","1")
+      )
+
+    }
   }
   describe("binomial permutation(digits)"){
     it("returns a list of numbers composed of [0,1]"){
