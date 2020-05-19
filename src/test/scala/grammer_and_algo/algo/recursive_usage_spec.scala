@@ -1,6 +1,7 @@
 package grammer_and_algo.algo
 
 import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
+import org.scalatest.Matchers._
 class RecursiveNumSplitSpec extends FunSpec
   with Matchers
   with GivenWhenThen {
@@ -40,6 +41,30 @@ class RecursiveNumSplitSpec extends FunSpec
       When("list has nothing")
       val l0 = List()
       RecursiveUsage.permutation(l0) shouldBe List(List())
+    }
+  }
+  describe("binomial permutation(digits)"){
+    it("returns a list of numbers composed of [0,1]"){
+      RecursiveUsage.binomialPermutation(3) should contain allOf(
+        "001",
+        "000",
+        "010",
+        "011",
+        "100",
+        "101",
+        "110",
+        "111"
+      )
+      RecursiveUsage.binomialPermutation(3) should contain only(
+        "001",
+        "000",
+        "010",
+        "011",
+        "100",
+        "101",
+        "110",
+        "111"
+      )
     }
   }
 }

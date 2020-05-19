@@ -26,6 +26,14 @@ object RecursiveUsage {
         }
       )
     }
-
+  }
+  def binomialPermutation(digit:Int):List[String]={
+    digit match {
+      case 1 => List("1","0")
+      case _ => binomialPermutation(digit - 1)
+        .foldRight(Nil:List[String])((z,acc)=>{
+          ("0"+z) :: ("1"+z) :: acc
+        })
+    }
   }
 }
