@@ -19,7 +19,7 @@ class SealedAbstractCaseUserClassSpec extends FunSpec
         }
       }
     describe("new FinalUser(-1,'name')"){
-      it("can unfortunately returns FinalUser(-1,'name')"){
+      it("can UNFORTUNATELY returns FinalUser(-1,'name')"){
         val illegalUser = new FinalUser(-1,"name")
         illegalUser shouldBe FinalUser(-1,"name")
       }
