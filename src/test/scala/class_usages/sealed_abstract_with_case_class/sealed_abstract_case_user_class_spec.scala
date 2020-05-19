@@ -4,7 +4,7 @@ import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 class SealedAbstractCaseUserClassSpec extends FunSpec
   with Matchers with GivenWhenThen {
-  describe("FinalUser"){
+  describe("FinalUser: case class with final keyword"){
       describe("#create(1,name)"){
         it("returns Some[FinalUser(1,name)]"){
 
