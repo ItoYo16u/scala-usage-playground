@@ -66,7 +66,12 @@ class OriginalTimeClassSpec extends FunSpec with Matchers {
     }
   }
 
-  describe("TimeRange"){
+  describe("TimeRange(start,end)"){
+    it("returns err when start > end"){
+      val start = Time("08:00")
+      val end = Time("07:00")
+      an[IllegalArgumentException] shouldBe thrownBy(TimeRange(start,end))
+    }
     describe("#isInRange(Time)"){
       it("returns true if time is in range"){
         val t1 = Time(10)
