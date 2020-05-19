@@ -1,7 +1,6 @@
-import org.scalatest.FunSpec
-import org.scalatest.GivenWhenThen
-import org.scalatest.Matchers
-import grammer_and_algo.algo._
+package grammer_and_algo.algo
+
+import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 class RecursiveNumSplitSpec extends FunSpec
   with Matchers
   with GivenWhenThen {
