@@ -27,6 +27,9 @@ case class Tag(value:String,options:Map[String,String]=Map.empty[String,String])
   def toHTMLTags:(String,String) = (s"<$value $optionsAsString>",s"</$value>")
 }
 
+
+
+// Inline element
 case class Strong(content:Inline) extends InlineTag{val tag = Tag("strong")}
 case class Emphasis(content:Inline) extends InlineTag{val tag=Tag("em")}
 case class Italic(content:Inline) extends InlineTag{val tag=Tag("i")}
