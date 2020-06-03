@@ -1,6 +1,7 @@
 package com.github.ItoYo16u.parsers.md_to_html
 
-sealed abstract trait Inline
+sealed abstract trait Inline extends Listable
+abstract trait Listable
 
 abstract trait InlineText extends Inline {
   def content:String
@@ -34,7 +35,7 @@ case class Link(content:Inline,href:String) extends InlineTag{val tag=Tag("a",op
 case class PlainText(content:String) extends InlineText
 
 
-sealed abstract trait Block{
+sealed abstract trait Block extends Listable{
   def tag:Tag
 }
 
@@ -47,9 +48,25 @@ abstract trait BlockContent extends Block {
   }
 }
 
-case class Heading(level:Int,content:Inline) extends BlockContent{
-  val tag=Tag(s"h$level")
-}
+case class Heading(level:Int,content:Inline) extends BlockContent{val tag=Tag(s"h$level")}
 case class P(content:Inline) extends BlockContent{val tag=Tag("p")}
+
+case class ListBlock(content:List[ListItem],kind:String="ul") extends Listable{
+   val tag=Tag(kind)
+   override def toString: String = {
+     tag.toHTMLTags match {
+       case(start,end) => start + content.foldLeft(""){ case (acc,listItem)=> acc + listItem.toString } + end
+     }
+   }
+ }
+case class ListItem(content: Listable) extends Listable{
+  val tag=Tag("li")
+
+  override def toString: String = {
+    tag.toHTMLTags match {
+      case (start,end)=> start + content.toString + end
+    }
+  }
+}
 case object Empty extends Block{val tag=Tag("")}
-case object HR extends Block{val tag=Tag("hr")}
+case object Hr extends Block{val tag=Tag("hr")}
