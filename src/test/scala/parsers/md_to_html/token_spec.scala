@@ -1,5 +1,5 @@
 import org.scalatest.{FunSpec, Matchers}
-import com.github.ItoYo16u.parsers.md_to_html.{PlainText, Strong,Link,Emphasis,Heading,ListItem,ListBlock}
+import com.github.ItoYo16u.parsers.md_to_html.{Emphasis, Heading, Italic, Link, ListBlock, ListItem, PlainText, Strong}
 
 class TokenSpec extends FunSpec with Matchers {
 
@@ -23,10 +23,10 @@ class TokenSpec extends FunSpec with Matchers {
   }
   describe("Heading(n)"){
     it("returns <hn>content</hn>"){
-      val headings: List[Heading]  = (1 to 6).map((n)=>Heading(n,Strong(PlainText("test")))).toList
+      val headings: List[Heading]  = (1 to 6).map((n)=>Heading(n,List(PlainText("this is"),Italic(PlainText("a")),Strong(PlainText("test"))))).toList
       headings.zipWithIndex.foreach{case(headingN,idx)=>{
         println(headingN.toString)
-        headingN.toString shouldBe s"<h${idx+1} ><strong >test</strong></h${idx+1}>"
+        headingN.toString shouldBe s"<h${idx+1} >this is<i >a</i><strong >test</strong></h${idx+1}>"
       }}
     }
   }

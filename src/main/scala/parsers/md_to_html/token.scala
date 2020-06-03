@@ -1,12 +1,11 @@
 package com.github.ItoYo16u.parsers.md_to_html
-
-sealed abstract trait Inline extends Listable
+sealed abstract trait Token
+sealed abstract trait Inline extends Listable with Token
 abstract trait Listable
 
 abstract trait InlineText extends Inline {
   def content:String
-
-  override def toString: String = content
+  override def toString = content
 }
 
 abstract trait InlineTag extends Inline{
@@ -35,23 +34,23 @@ case class Link(content:Inline,href:String) extends InlineTag{val tag=Tag("a",op
 case class PlainText(content:String) extends InlineText
 
 
-sealed abstract trait Block extends Listable{
+sealed abstract trait Block extends Listable with Token{
   def tag:Tag
 }
 
-abstract trait BlockContent extends Block {
-  def content: Inline
+abstract trait BlockContent extends Block{
+  def content: List[Inline]
   override def toString: String = {
     tag.toHTMLTags match {
-      case (start,end) => start + content.toString + end
+      case (start,end) => start + content.foldLeft(""){ case (acc,inline)=> acc + inline.toString } + end
     }
   }
 }
 
-case class Heading(level:Int,content:Inline) extends BlockContent{val tag=Tag(s"h$level")}
-case class P(content:Inline) extends BlockContent{val tag=Tag("p")}
+case class Heading(level:Int,content:List[Inline]) extends BlockContent{val tag=Tag(s"h$level")}
+case class P(content:List[Inline]) extends BlockContent{val tag=Tag("p")}
 
-case class ListBlock(content:List[ListItem],kind:String="ul") extends Listable{
+case class ListBlock(content:List[ListItem],kind:String="ul") extends Listable with Token{
    val tag=Tag(kind)
    override def toString: String = {
      tag.toHTMLTags match {
@@ -59,7 +58,7 @@ case class ListBlock(content:List[ListItem],kind:String="ul") extends Listable{
      }
    }
  }
-case class ListItem(content: Listable) extends Listable{
+case class ListItem(content: Listable) extends Listable with Token{
   val tag=Tag("li")
 
   override def toString: String = {
