@@ -88,4 +88,42 @@ class RecursiveNumSplitSpec extends FunSpec
       )
     }
   }
+  describe("nDigitPermutation(digit,n)") {
+    // it returns  list of combination, each digit compose of 0 to (n-1) of designated digit(s)
+    describe("digit = 1,n=1"){
+      it("returns [[0]]"){
+        RecursiveUsage.nDigitPermutation(1,1) shouldBe List(List(0))
+      }
+    }
+    describe("digit = 1,n = 2"){
+      it("returns [[0],[1]]"){
+        RecursiveUsage.nDigitPermutation(1,2) shouldBe List(List(0),List(1))
+      }
+    }
+    describe("digit=2,n = 2"){
+      it("returns [[0,0],[0,1],[1,0],[1,1]]"){
+        RecursiveUsage.nDigitPermutation(2,2) should  contain theSameElementsAs Vector(
+          List(0,0),
+          List(0,1),
+          List(1,0),
+          List(1,1)
+        )
+      }
+    }
+    describe("digit=2,n=3"){
+      it("returns [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]]"){
+        RecursiveUsage.nDigitPermutation(2,3) should contain theSameElementsAs Vector(
+          List(0,0),
+          List(0,1),
+          List(0,2),
+          List(1,0),
+          List(1,1),
+          List(1,2),
+          List(2,0),
+          List(2,1),
+          List(2,2)
+        )
+      }
+    }
+  }
 }

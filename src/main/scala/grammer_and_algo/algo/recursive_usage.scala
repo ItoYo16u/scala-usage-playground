@@ -36,4 +36,16 @@ object RecursiveUsage {
         })
     }
   }
+  def nDigitPermutation(digit:Int,n: Int):List[List[Int]] = {
+    digit match {
+      case 1 => (0 to (n-1)).map((k)=> List(k)).toList
+      case _ => nDigitPermutation(digit-1,n).foldLeft(Nil:List[List[Int]]){
+        case (acc,list) => {
+          (0 to (n-1)).foldLeft(acc)((tmpResult,l)=>{
+            (l::list) ::tmpResult
+          } )
+        }
+      }
+    }
+  }
 }
