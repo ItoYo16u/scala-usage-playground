@@ -126,4 +126,33 @@ class RecursiveNumSplitSpec extends FunSpec
       }
     }
   }
+  describe("readStartEndBlockLines"){
+    /*次のようなlinesのstart,endで囲まれたブロックを読み込むことを想定
+       start
+        xx
+        a
+        b
+        c
+        d
+       end
+       start
+        y
+        mm
+        xx
+       end
+       start
+       end
+    */
+    // lines = ["start","xx","a","b","c","d","end","start","y","mm","xx","end","start","end"]
+    describe("#(lines)"){
+      it("returns [['xx','a','b','c','d'],['y','mm','xx'],[]]"){
+        val lines = List("start","xx","a","b","c","d","end","start","y","mm","xx","end","start","end")
+        RecursiveUsage.readStartEndBlockLines(lines) shouldBe List(
+          List("xx","a","b","c","d"),
+          List("y","mm","xx"),
+          List()
+        )
+      }
+    }
+  }
 }

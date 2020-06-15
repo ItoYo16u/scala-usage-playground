@@ -48,4 +48,16 @@ object RecursiveUsage {
       }
     }
   }
+
+  def readStartEndBlockLines(lines:List[String],tmp:List[String]=Nil):List[List[String]] = {
+    lines match {
+      case Nil => Nil
+      case "start"::tail => readStartEndBlockLines(tail)
+      case "end"::tail => tmp.reverse :: readStartEndBlockLines(tail)
+      case head::tail => {
+        val partial = head :: tmp
+        readStartEndBlockLines(tail,partial)
+      }
+     }
+  }
 }
