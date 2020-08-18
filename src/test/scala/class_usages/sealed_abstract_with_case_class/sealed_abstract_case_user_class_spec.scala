@@ -1,4 +1,3 @@
-import class_usages.sealed_abstract_with_case_class
 import class_usages.sealed_abstract_with_case_class.{FinalUser, User}
 import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
