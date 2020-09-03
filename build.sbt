@@ -1,5 +1,6 @@
 version := "0.1"
 scalaVersion := "2.12.7"
+val circeVersion = "0.12.3"
 lazy val akkaHttpVersion = "10.2.0"
 lazy val akkaVersion    = "2.6.8"
 
@@ -17,6 +18,9 @@ lazy val root = (project in file("."))
 
         "com.typesafe.akka" %% "akka-http-testkit"        % akkaHttpVersion % Test,
         "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion     % Test,
-        "org.scalatest"     %% "scalatest"                % "3.0.8"         % Test
+        "org.scalatest"     %% "scalatest"                % "3.0.8"         % Test,
+        "io.circe" %% "circe-core" % circeVersion,
+        "io.circe" %% "circe-generic" % circeVersion,
+        "io.circe" %% "circe-parser" % circeVersion,
       )
     )
