@@ -73,13 +73,18 @@ final case class Preferences(value: Map[Movie, Score]) {
   }
 }
 
-final case class Customer(name: String, preferences: Preferences) {}
+final case class Customer(name: String, preferences: Preferences) {
+  private def alreadyWatchedMovies:Set[Movie] = preferences.movies
+  def findUnwatchedMoviesFrom(theOther:Customer) :Set[Movie] = theOther.alreadyWatchedMovies.diff(alreadyWatchedMovies)
+}
 
-final case class Similarity(value: Double)
+final case class Similarity(value: Double){
+  require(0 < value && value <= 1)
+}
 
 object Similarity {
-  def of(one: Customer, theOther: Customer): Double = {
+  def of(one: Customer, theOther: Customer): Similarity = {
     val distance = one.preferences.calcDistanceFrom(theOther.preferences)
-    1 / (1 + math.sqrt(distance))
+    Similarity(1.0 / (1.0 + math.sqrt(distance)))
   }
 }
