@@ -15,3 +15,6 @@ sntとMavenは共にApache Ivyを内部的に使っている. また、ssbtはMa
 ```
 libraryDependencies += "com.example.example" % "libaryName" % "x.x.x"
 ```
+
+参考
+https://alvinalexander.com/scala/how-use-maven-repository-library-with-scala-sbt/
