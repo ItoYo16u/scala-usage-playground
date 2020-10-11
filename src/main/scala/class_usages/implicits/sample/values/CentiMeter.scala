@@ -1,4 +1,5 @@
 package class_usages.implicits.sample.values
+
 final case class CentiMeter(private val v: Int) extends Height {
   require(0 < v)
 

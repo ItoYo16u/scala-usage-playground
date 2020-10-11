@@ -4,15 +4,22 @@ import class_usages.implicits.sample.rules.Rule.BoundsRule
 import class_usages.implicits.sample.rules._
 import class_usages.implicits.sample.values._
 
-import scala.util.{Success, Try}
+import scala.util.{ Success, Try }
 
-final case class Bmi(value: Double)(implicit boundsRule:BoundsRule){
-  def isAppropriate : Boolean = boundsRule.lowerBound < value && value < boundsRule.upperBound
+/**
+  * Bmiをあらわすvalue object
+  */
+final case class Bmi(value: Double)(implicit boundsRule: BoundsRule) {
+  def isAppropriate: Boolean = boundsRule.lowerBound < value && value < boundsRule.upperBound
 }
 
-object Bmi{
+/**
+  * 身長と体重からBmiを生成するコンパニオンオブジェクト.
+  */
+object Bmi {
   implicit val rule = AppropriateBmiRule
   import class_usages.implicits.sample.extensions.NumberExtension._
+
   def of(height: Height)(weight: Weight): Try[Bmi] = {
     Try {
       Bmi(
@@ -24,7 +31,7 @@ object Bmi{
       )
     }
   }
-/*
+  /*
   def appropriateWeightMinMax(h: Height): Try[MinMax[Weight]] = {
     val weightRange = (1 to 200).map(v => v.kg)
     val appropriateWeightList = weightRange
@@ -39,5 +46,5 @@ object Bmi{
       MinMax[Weight](appropriateWeightList.min, appropriateWeightList.max)
     }
   }
-  */
+   */
 }

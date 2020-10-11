@@ -1,25 +1,30 @@
-import scala.concurrent.{Future,Await}
+import scala.concurrent.{ Await, Future }
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import concurrent.duration._
+
 object AsyncUsage extends App {
   val start = System.currentTimeMillis()
-  def info(msg:String):Unit = printf(
-    "%.2f: %s\n",
-    (System.currentTimeMillis() - start)/1000.0,msg
-  )
+
+  def info(msg: String): Unit =
+    printf(
+      "%.2f: %s\n",
+      (System.currentTimeMillis() - start) / 1000.0,
+      msg
+    )
 
   case class Product(name: String) {
-    def assembleWith(that:Product):Product= Product(s"${this.name} with ${that.name}")
+    def assembleWith(that: Product): Product = Product(s"${this.name} with ${that.name}")
   }
+
   // this is sync usage
-  def build(name:String):Product = {
+  def build(name: String): Product = {
     Thread.sleep(1000L)
     info(s"$name built!")
     Product(name)
   }
 
-  def pack(product:Product): Unit = {
+  def pack(product: Product): Unit = {
     info(s"(${product.name})is successfully packed!")
   }
 
@@ -27,7 +32,7 @@ object AsyncUsage extends App {
   val p2 = build("p2")
   pack(p1 assembleWith p2)
 
-  val badForWithFuture:Future[Unit] = for {
+  val badForWithFuture: Future[Unit] = for {
     badP1 <- Future {
       build("badP1")
     }
@@ -38,12 +43,12 @@ object AsyncUsage extends App {
     pack(badP1 assembleWith badP2)
   }
   // this is bad for performance
-  Await.result(badForWithFuture,10.seconds)
+  Await.result(badForWithFuture, 10.seconds)
   // instead of this, write like bellow
 
   // You should make Instance outside "for"
-  val betterP1 = Future {build("betterP1")}
-  val betterP2 = Future {build("betterP2")}
+  val betterP1 = Future { build("betterP1") }
+  val betterP2 = Future { build("betterP2") }
 
   val betterForWIthFuture = for {
     b1 <- betterP1
@@ -52,7 +57,7 @@ object AsyncUsage extends App {
     pack(b1 assembleWith b2)
   }
   // this is better for performance
-  Await.result(betterForWIthFuture,10.seconds)
+  Await.result(betterForWIthFuture, 10.seconds)
 
   // you can use "async","await" to handle non blocking code with better readability
   // NOTE: async is external library.
@@ -70,7 +75,5 @@ object AsyncUsage extends App {
        }
        Await.result(result,10.seconds)
    */
-
-
 
 }

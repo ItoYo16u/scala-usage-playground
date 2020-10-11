@@ -1,4 +1,3 @@
 package com.github.ItoYo16u.parsers.md_to_html
 
-object Tokenizer {
-}
+object Tokenizer {}
