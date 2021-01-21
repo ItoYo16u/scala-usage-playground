@@ -4,14 +4,11 @@ import java.io.File
 
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
-import akka.http.javadsl.model.headers.RawHeader
 import akka.http.scaladsl.Http
-
 import scala.concurrent.duration._
 import akka.stream.scaladsl._
 
 import scala.collection.immutable.Seq
-import akka.http.scaladsl.server.directives._
 import akka.http.javadsl.model.ws.Message
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model.{ headers, _ }
