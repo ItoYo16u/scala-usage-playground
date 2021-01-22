@@ -54,3 +54,11 @@ WARNING: Unmatched cancel notification for request id 146
 Jan 21, 2021 4:33:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 148
 2021.01.21 16:33:27 WARN  no build target for: /mnt/c/users/81801/workspace/scala_libs/scala_usage_playground/src/test/scala/web/akka/JWTDirectivesSpec.scala
+2021.01.21 16:35:24 INFO  shutting down Metals
+[0m2021.01.21 19:50:21 INFO  Started: Metals version 0.9.10 in workspace '/mnt/c/users/81801/workspace/scala_libs/scala_usage_playground' for client vscode 1.52.1.[0m
+[0m2021.01.21 19:50:23 INFO  time: initialize in 1.88s[0m
+[0m2021.01.21 19:50:24 WARN  resetting database: /mnt/c/users/81801/workspace/scala_libs/scala_usage_playground/.metals/metals.h2.db[0m
+[0m2021.01.21 19:50:24 WARN  Build server is not auto-connectable.[0m
+[0m2021.01.21 19:50:34 INFO  no build target: using presentation compiler with only scala-library[0m
+[0m2021.01.21 19:50:37 WARN  no build target for: /mnt/c/users/81801/workspace/scala_libs/scala_usage_playground/src/main/scala/web/akka/JWTDirectives.scala[0m
+[0m2021.01.21 19:50:42 INFO  shutting down Metals[0m
